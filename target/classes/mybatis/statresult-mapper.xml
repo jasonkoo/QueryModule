@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="com.lenovo.push.data.serving.mapper.StatResultMapper">
+	<select id="getDailyStatResult" parameterType="map" resultType="statresult" resultMap="statResultMap">
+		select value from statresult where thekey=#{thekey} and thedate=#{thedate}
+	</select>
+	<select id="getSummaryStatResult" parameterType="map" resultType="statresult" resultMap="statResultMap">
+		select sum(value) as sum from statresult where thekey=#{thekey}
+	</select>
+	<select id="getStatResultByDateRange" parameterType="map" resultType="statresult" resultMap="statResultMap">
+		select sum(value) from statresult where thekey=#{thekey} and thedate&gt;=#{startdate} and thedate&lt;=#{enddate}
+	</select>		
+</mapper>
